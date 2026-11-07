@@ -10,7 +10,10 @@ API key (pick one):
     2. environment variable     ->  export GEMINI_API_KEY="your-key"
     3. paste it in the sidebar while the app is running
 """
-
+import streamlit as st
+import io
+from gtts import gTTS
+from openai import OpenAI
 import os
 from pathlib import Path
 
