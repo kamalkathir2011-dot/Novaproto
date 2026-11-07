@@ -267,7 +267,7 @@ if prompt:
         with st.chat_message("assistant", avatar="🎓"):
             reply = st.write_stream(stream_reply(st.session_state.chat, prompt))
         st.session_state.messages.append({"role": "assistant", "content": reply})
-        speak(replay)
+        speak(reply)
     except Exception as e:
         st.error(f"Nova couldn't answer. Check your API key and model name (`{MODEL}`), then try again.\n\n`{e}`")
         
