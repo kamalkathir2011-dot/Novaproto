@@ -281,6 +281,5 @@ import io
 def speak(text, lang="ta"):
     buf = io.BytesIO()
     gTTS(text=text, lang=lang).write_to_fp(buf)
-    st.audio(buf.getvalue(), format="audio/mp3", autoplay=True)
+    
 
-speak("Hello! Welcome to my app.")
