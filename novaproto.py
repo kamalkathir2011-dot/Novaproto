@@ -6,7 +6,7 @@ Run:
     streamlit run app.py
 
 API key (pick one):
-    1. .streamlit/secrets.toml  ->  GEMINI_API_KEY = "AQ.Ab8RN6ICkuwyWoYbkCeoOoCnybb6y9NAg1YcyBOGWo8zGqwdfg"
+    1. .streamlit/secrets.toml  ->  GEMINI_API_KEY = "your_key"
     2. environment variable     ->  export GEMINI_API_KEY="your-key"
     3. paste it in the sidebar while the app is running
 """
