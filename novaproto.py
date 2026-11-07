@@ -160,11 +160,7 @@ def queue_prompt(text: str):
 def reset_chat():
     st.session_state.messages = []
     st.session_state.chat = None
-    def reset_chat():
-    st.session_state.messages = []
-    st.session_state.chat = None
-
-
+    
 def speak(text: str, lang: str = "en"):
     clean = text.replace("*", "").replace("#", "").replace("`", "")[:1500]
     try:
