@@ -281,5 +281,5 @@ import io
 def speak(text, lang="ta"):
     buf = io.BytesIO()
     gTTS(text=text, lang=lang).write_to_fp(buf)
-    
+    autoplay=true
 
