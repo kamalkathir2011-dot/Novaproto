@@ -250,36 +250,4 @@ if prompt:
         st.session_state.messages.append({"role": "assistant", "content": reply})
     except Exception as e:
         st.error(f"Nova couldn't answer. Check your API key and model name (`{MODEL}`), then try again.\n\n`{e}`")
-        import streamlit as st
-
-audio = st.audio_input("Record your question")
-
-if audio:
-    st.audio(audio)  # play it back
-    # audio is a file-like object (WAV) you can send to a speech-to-text service
-from openai import OpenAI
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-
-if audio:
-    text = client.audio.transcriptions.create(
-        model="whisper-1",
-        file=("speech.wav", audio.getvalue())
-    ).text
-    st.write("You said:", text)
-    from gtts import gTTS
-import io
-
-def speak(text, lang="en"):
-    buf = io.BytesIO()
-    gTTS(text=text, lang=lang).write_to_fp(buf)
-    st.audio(buf.getvalue(), format="audio/mp3", autoplay=True)
-
-speak("Hi this is nova now can i help you.")
-from gtts import gTTS
-import io
-
-def speak(text, lang="ta"):
-    buf = io.BytesIO()
-    gTTS(text=text, lang=lang).write_to_fp(buf)
-    autoplay=true
-
+        
