@@ -17,7 +17,6 @@ from openai import OpenAI
 import os
 from pathlib import Path
 
-import streamlit as st
 from google import genai
 from google.genai import types
 
@@ -161,7 +160,19 @@ def queue_prompt(text: str):
 def reset_chat():
     st.session_state.messages = []
     st.session_state.chat = None
+    def reset_chat():
+    st.session_state.messages = []
+    st.session_state.chat = None
 
+
+def speak(text: str, lang: str = "en"):
+    clean = text.replace("*", "").replace("#", "").replace("`", "")[:1500]
+    try:
+        buf = io.BytesIO()
+        gTTS(text=clean, lang=lang).write_to_fp(buf)
+        st.audio(buf.getvalue(), format="audio/mp3", autoplay=True)
+    except Exception:
+        st.caption("Voice isn't available right now.")
 
 # ----------------------------------------------------------------------------
 # Sidebar
@@ -232,6 +243,18 @@ if not st.session_state.messages:
         cols[i % 2].button(s, key=f"sugg_{i}", on_click=queue_prompt, args=(s,), use_container_width=True)
 
 prompt = st.chat_input("Ask Nova something…")
+
+audio = st.audio_input("🎤 Or ask by voice")
+if audio is not None and st.session_state.get("last_audio") != audio.file_id:
+    st.session_state.last_audio = audio.file_id
+    try:
+        oa = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+        prompt = oa.audio.transcriptions.create(
+            model="whisper-1", file=("speech.wav", audio.getvalue())
+        ).text
+    except Exception as e:
+        st.error(f"Couldn't understand the recording: `{e}`")
+
 if "queued" in st.session_state:
     prompt = st.session_state.pop("queued")
 
@@ -248,6 +271,7 @@ if prompt:
         with st.chat_message("assistant", avatar="🎓"):
             reply = st.write_stream(stream_reply(st.session_state.chat, prompt))
         st.session_state.messages.append({"role": "assistant", "content": reply})
+        speak(replay)
     except Exception as e:
         st.error(f"Nova couldn't answer. Check your API key and model name (`{MODEL}`), then try again.\n\n`{e}`")
         
