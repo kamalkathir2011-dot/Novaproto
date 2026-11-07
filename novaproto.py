@@ -274,7 +274,7 @@ def speak(text, lang="en"):
     gTTS(text=text, lang=lang).write_to_fp(buf)
     st.audio(buf.getvalue(), format="audio/mp3", autoplay=True)
 
-speak("Hello! Welcome to my app.")
+speak("Hi this is nova now can i help you.")
 from gtts import gTTS
 import io
 
