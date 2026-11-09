@@ -13,16 +13,14 @@ API key (pick one):
 import streamlit as st
 import io
 from PIL import Image
-
-icon_path = os.path.join(os.path.dirname(__file__), "moon.png")
-icon = Image.open(icon_path)
-
-st.set_page_config(page_title="My App Name", page_icon=icon)
 from gtts import gTTS
 from openai import OpenAI
 import os
 from pathlib import Path
+icon_path = os.path.join(os.path.dirname(__file__), "moon.png")
+icon = Image.open(icon_path)
 
+st.set_page_config(page_title="My App Name", page_icon=icon)
 from google import genai
 from google.genai import types
 
