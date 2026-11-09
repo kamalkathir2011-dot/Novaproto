@@ -2,4 +2,3 @@ streamlit
 google-genai
 gtts
 openai
-from PIL import Image
