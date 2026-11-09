@@ -12,7 +12,7 @@ API key (pick one):
 """
 import streamlit as st
 st.set_page_config(
-    page_title="Nova.Ai Teacher.Streamlit.app",
+    page_title="my app name",
     page_icon="moon.png",
 )
 import io
