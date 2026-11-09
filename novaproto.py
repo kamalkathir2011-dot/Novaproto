@@ -11,6 +11,11 @@ API key (pick one):
     3. paste it in the sidebar while the app is running
 """
 import streamlit as st
+
+st.set_page_config(
+    page_title="My App Name",
+    page_icon="moon.png",
+)
 import io
 from gtts import gTTS
 from openai import OpenAI
